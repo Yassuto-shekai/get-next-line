@@ -6,7 +6,7 @@
 /*   By: yel-mota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:28:15 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/06 16:36:30 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:44:19 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,4 @@ char	*get_next_line(int fd)
 	str = ft_whereline(dest);
 	dest = ft_strrest(dest);
 	return(str);
-}
-int main ()
-{
-	int fd = open("text", O_RDONLY);
-	char *str;
-	int i = 0;
-	while (i < 3)
-	{
-		str = get_next_line(fd);
-		printf("%s", str);
-		i++;
-	}
 }

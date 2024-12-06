@@ -6,7 +6,7 @@
 /*   By: yel-mota <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:31:22 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/06 15:32:00 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:44:07 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 char    *get_next_line(int fd);
 char    *ft_strjoin(char const *s1, char const *s2);
+char	*ft_strrest(char *dest);
 char    *ft_strread(int fd, char *dest);
 char    *ft_strdup(const char *str);
 char     *ft_whereline(char *dest);
