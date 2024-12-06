@@ -1,22 +1,33 @@
-# ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yel-mota <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 13:31:22 by yel-mota          #+#    #+#             */
+/*   Updated: 2024/12/06 15:32:00 by yel-mota         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#ifndef GET_NEXT_LINE_H
+# define  GET_NEXT_LINE_H
+
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <unistd.h>
 
-# ifndef BUUFER_SIZE
-# define BUFFER_SIZE 15
-# endif 
+char    *get_next_line(int fd);
+char    *ft_strjoin(char const *s1, char const *s2);
+char    *ft_strread(int fd, char *dest);
+char    *ft_strdup(const char *str);
+char     *ft_whereline(char *dest);
+int    ft_strline(const char *str);
+size_t     ft_strlen(const char *str);
 
-char	*get_next_line(int fd);
-char	*ft_strcpy(char *dest, char *src);
-int	ft_strchr(const char *str, char c);
-int ft_endline(const char *str);
-char	*ft_strread(char *str, int fd);
-char	*ft_str2(char *strva, char *str, int fd);
-char	*ft_str1(char *str, int fd);
-int	ft_strlen(const char *str);
-
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 40
 # endif
+
+#endif
