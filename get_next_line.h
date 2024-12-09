@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-mota <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 13:31:22 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/06 16:44:07 by yel-mota         ###   ########.fr       */
+/*   Created: 2024/12/09 04:19:20 by yel-mota          #+#    #+#             */
+/*   Updated: 2024/12/09 17:55:06 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define  GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <fcntl.h>
 
-char    *get_next_line(int fd);
-char    *ft_strjoin(char const *s1, char const *s2);
-char	*ft_strrest(char *dest);
-char    *ft_strread(int fd, char *dest);
-char    *ft_strdup(const char *str);
-char     *ft_whereline(char *dest);
-int    ft_strline(const char *str);
-size_t     ft_strlen(const char *str);
+char	*get_next_line(int fd);
+char	*ft_strrest(char *str);
+char	*ft_strline(char *str);
+char	*ft_strread(int fd, char *dest);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_whereline(const char *str);
+size_t	ft_strlen(const char *str);
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 40
+#  define BUFFER_SIZE 77
 # endif
 
 #endif
