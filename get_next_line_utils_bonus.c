@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 17:05:57 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 17:32:42 by yel-mota         ###   ########.fr       */
+/*   Created: 2024/12/10 14:47:31 by yel-mota          #+#    #+#             */
+/*   Updated: 2024/12/12 18:25:50 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_bonus(const char *str)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-size_t	ft_whereline(const char *str)
+size_t	ft_whereline_bonus(const char *str)
 {
 	size_t	i;
 
@@ -36,12 +36,12 @@ size_t	ft_whereline(const char *str)
 	return (i + 1);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup_bonus(const char *s)
 {
 	char		*dest;
 	size_t		i;
 
-	dest = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	dest = malloc(sizeof(char) * (ft_strlen_bonus(s) + 1));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;

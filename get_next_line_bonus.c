@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 04:16:51 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 18:05:15 by yel-mota         ###   ########.fr       */
+/*   Created: 2024/12/10 14:47:41 by yel-mota          #+#    #+#             */
+/*   Updated: 2024/12/12 18:20:42 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_bonus(char const *s1, char const *s2)
 {
 	char	*str;
 	size_t	i;
@@ -20,8 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	i = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	i = ft_strlen_bonus(s1) + ft_strlen_bonus(s2);
+	str = malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -40,7 +40,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-char	*ft_strread(int fd, char *dest)
+char	*ft_strread_bonus(int fd, char *dest)
 {
 	char	*str;
 	char	*tmp;
@@ -50,9 +50,9 @@ char	*ft_strread(int fd, char *dest)
 	if (str == NULL)
 		return (NULL);
 	if (!dest)
-		dest = ft_strdup("");
+		dest = ft_strdup_bonus("");
 	i = 1;
-	while (ft_whereline(str) == 0 && i != 0)
+	while (ft_whereline_bonus(str) == 0 && i != 0)
 	{
 		i = read(fd, str, BUFFER_SIZE);
 		if (i == -1)
@@ -60,24 +60,24 @@ char	*ft_strread(int fd, char *dest)
 		str[i] = '\0';
 		if (i == 0)
 			break ;
-		tmp = ft_strdup(dest);
+		tmp = ft_strdup_bonus(dest);
 		free(dest);
-		dest = ft_strjoin(tmp, str);
+		dest = ft_strjoin_bonus(tmp, str);
 		free(tmp);
 	}
 	return (free(str), dest);
 }
 
-char	*ft_strline(char *str)
+char	*ft_strline_bonus(char *str)
 {
 	ssize_t	i;
 	ssize_t	j;
 	char	*dest;
 
-	i = ft_whereline(str);
+	i = ft_whereline_bonus(str);
 	if ((i - 1) == -1)
 	{
-		i = ft_strlen(str);
+		i = ft_strlen_bonus(str);
 		dest = malloc(sizeof(char) * (i + 1));
 	}
 	else
@@ -94,17 +94,17 @@ char	*ft_strline(char *str)
 	return (dest);
 }
 
-char	*ft_strrest(char *str)
+char	*ft_strrest_bonus(char *str)
 {
 	char	*dest;
 	ssize_t	j;
 	ssize_t	i;
 
-	i = ft_whereline(str);
+	i = ft_whereline_bonus(str);
 	if ((i - 1) == -1)
-		return (free(str), ft_strdup(""));
+		return (free(str), ft_strdup_bonus(""));
 	else
-		dest = malloc(sizeof(char) * (ft_strlen(str) - i));
+		dest = malloc(sizeof(char) * (ft_strlen_bonus(str) - i));
 	if (!dest)
 		return (NULL);
 	j = 0;
@@ -119,19 +119,19 @@ char	*ft_strrest(char *str)
 
 char	*get_next_line_bonus(int fd)
 {
-	static char	*dest;
+	static char	*dest[1024];
 	char		*str;
 
-	dest = ft_strread(fd, dest);
-	if (!dest)
+	dest[fd] = ft_strread_bonus(fd, dest[fd]);
+	if (!dest[fd])
 		return (NULL);
-	if (*dest == '\0')
-		return (free(dest), NULL);
-	str = ft_strline(dest);
+	if (*dest[fd] == '\0')
+		return (free(dest[fd]), NULL);
+	str = ft_strline_bonus(dest[fd]);
 	if (!str)
 		return (NULL);
-	dest = ft_strrest(dest);
-	if (!dest)
+	dest[fd] = ft_strrest_bonus(dest[fd]);
+	if (!dest[fd])
 		return (NULL);
 	return (str);
 }
