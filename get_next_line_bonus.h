@@ -6,7 +6,7 @@
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:47:43 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 17:58:38 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:41:39 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-char	*get_next_line_bonus(int fd);
+char	*get_next_line(int fd);
 char	*ft_strrest_bonus(char *str);
 char	*ft_strline_bonus(char *str);
 char	*ft_strread_bonus(int fd, char *dest);

@@ -6,7 +6,7 @@
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:47:31 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 18:25:50 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:08:00 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen_bonus(const char *str)
 {
 	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] != '\0')
 		i++;
@@ -26,6 +28,8 @@ size_t	ft_whereline_bonus(const char *str)
 {
 	size_t	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] != '\n')
 	{
@@ -41,6 +45,8 @@ char	*ft_strdup_bonus(const char *s)
 	char		*dest;
 	size_t		i;
 
+	if (!s)
+		return (NULL);
 	dest = malloc(sizeof(char) * (ft_strlen_bonus(s) + 1));
 	if (dest == NULL)
 		return (NULL);

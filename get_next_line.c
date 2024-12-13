@@ -6,7 +6,7 @@
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:16:51 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 18:05:15 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/13 22:54:54 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ char	*ft_strread(int fd, char *dest)
 	if (!dest)
 		dest = ft_strdup("");
 	i = 1;
-	while (ft_whereline(str) == 0 && i != 0)
+	while (i != 0)
 	{
 		i = read(fd, str, BUFFER_SIZE);
 		if (i == -1)
 			return (free(str), free(dest), NULL);
 		str[i] = '\0';
-		if (i == 0)
-			break ;
 		tmp = ft_strdup(dest);
 		free(dest);
 		dest = ft_strjoin(tmp, str);
 		free(tmp);
+		if (ft_whereline(str) != 0 || i == 0)
+			break ;
 	}
 	return (free(str), dest);
 }
@@ -74,6 +74,8 @@ char	*ft_strline(char *str)
 	ssize_t	j;
 	char	*dest;
 
+	if (!str)
+		return (NULL);
 	i = ft_whereline(str);
 	if ((i - 1) == -1)
 	{
@@ -89,22 +91,24 @@ char	*ft_strline(char *str)
 	{
 		dest[j] = str[j];
 		j++;
-		dest[j] = '\0';
 	}
+	dest[j] = '\0';
 	return (dest);
 }
 
 char	*ft_strrest(char *str)
 {
 	char	*dest;
-	ssize_t	j;
-	ssize_t	i;
+	int		j;
+	int		i;
 
+	if (!str)
+		return (NULL);
 	i = ft_whereline(str);
 	if ((i - 1) == -1)
 		return (free(str), ft_strdup(""));
 	else
-		dest = malloc(sizeof(char) * (ft_strlen(str) - i));
+		dest = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
 	if (!dest)
 		return (NULL);
 	j = 0;
@@ -112,16 +116,18 @@ char	*ft_strrest(char *str)
 	{
 		dest[j] = str[i + j];
 		j++;
-		dest[j] = '\0';
 	}
+	dest[j] = '\0';
 	return (free(str), dest);
 }
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*dest;
 	char		*str;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	dest = ft_strread(fd, dest);
 	if (!dest)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: yel-mota <yel-mota@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 14:47:41 by yel-mota          #+#    #+#             */
-/*   Updated: 2024/12/12 18:20:42 by yel-mota         ###   ########.fr       */
+/*   Updated: 2024/12/13 22:55:57 by yel-mota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*ft_strjoin_bonus(char const *s1, char const *s2)
 	str = malloc(sizeof(char) * (i + 1));
 	if (str == NULL)
 		return (NULL);
+	i = 0;
 	while (s1[i] != '\0')
 	{
 		str[i] = s1[i];
@@ -52,18 +53,18 @@ char	*ft_strread_bonus(int fd, char *dest)
 	if (!dest)
 		dest = ft_strdup_bonus("");
 	i = 1;
-	while (ft_whereline_bonus(str) == 0 && i != 0)
+	while (i != 0)
 	{
 		i = read(fd, str, BUFFER_SIZE);
 		if (i == -1)
 			return (free(str), free(dest), NULL);
 		str[i] = '\0';
-		if (i == 0)
-			break ;
 		tmp = ft_strdup_bonus(dest);
 		free(dest);
 		dest = ft_strjoin_bonus(tmp, str);
 		free(tmp);
+		if (i == 0 || ft_whereline_bonus(str))
+			break ;
 	}
 	return (free(str), dest);
 }
@@ -74,6 +75,8 @@ char	*ft_strline_bonus(char *str)
 	ssize_t	j;
 	char	*dest;
 
+	if (!str)
+		return (NULL);
 	i = ft_whereline_bonus(str);
 	if ((i - 1) == -1)
 	{
@@ -89,8 +92,8 @@ char	*ft_strline_bonus(char *str)
 	{
 		dest[j] = str[j];
 		j++;
-		dest[j] = '\0';
 	}
+	dest[j] = '\0';
 	return (dest);
 }
 
@@ -100,11 +103,13 @@ char	*ft_strrest_bonus(char *str)
 	ssize_t	j;
 	ssize_t	i;
 
+	if (!str)
+		return (NULL);
 	i = ft_whereline_bonus(str);
 	if ((i - 1) == -1)
 		return (free(str), ft_strdup_bonus(""));
 	else
-		dest = malloc(sizeof(char) * (ft_strlen_bonus(str) - i));
+		dest = malloc(sizeof(char) * (ft_strlen_bonus(str) - i + 1));
 	if (!dest)
 		return (NULL);
 	j = 0;
@@ -112,16 +117,18 @@ char	*ft_strrest_bonus(char *str)
 	{
 		dest[j] = str[i + j];
 		j++;
-		dest[j] = '\0';
 	}
+	dest[j] = '\0';
 	return (free(str), dest);
 }
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*dest[1024];
 	char		*str;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	dest[fd] = ft_strread_bonus(fd, dest[fd]);
 	if (!dest[fd])
 		return (NULL);
